@@ -49,7 +49,8 @@ COMPILE				= $(CC) $(CFLAGS) $(INC) $(DEFINES)
 
 # Automatically include all source files
 PRE_SRCS 				:= $(shell find $(SRC_DIR) -type f -name '*.c' -not -path '*/\.*')
-SRCS         = $(filter-out $(SRC_DIR)/build/%, $(PRE_SRCS))
+EXCLUDED_FILES  :=$(shell find $(WORKING_DIR) -type f -name '*.c' -not -path '*/\.*')
+SRCS            := $(filter-out $(EXCLUDED_FILES), $(PRE_SRCS))
 OBJECTS    			:= $(patsubst $(SRC_DIR)%,$(BUILD_DIR)/%,$(SRCS:.$(SRC_EXT)=.$(OBJ_EXT)))
 
 all: $(BIN)
