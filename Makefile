@@ -17,7 +17,7 @@ CC 					?= gcc
 SRC_DIR				:= ./
 WORKING_DIR			:= ./build
 BUILD_DIR			:= $(WORKING_DIR)/obj
-BIN_DIR				:= $(WORKING_DIR)/bin
+BIN_DIR				:= ./bin
 UI_DIR 				:= ui
 
 WARNINGS 			:= -Wall -Wextra \
@@ -48,7 +48,8 @@ BIN 				:= $(BIN_DIR)/demo
 COMPILE				= $(CC) $(CFLAGS) $(INC) $(DEFINES)
 
 # Automatically include all source files
-SRCS 				:= $(shell find $(SRC_DIR) -type f -name '*.c' -not -path '*/\.*')
+PRE_SRCS 				:= $(shell find $(SRC_DIR) -type f -name '*.c' -not -path '*/\.*')
+SRCS         = $(filter-out $(SRC_DIR)/build/%, $(PRE_SRCS))
 OBJECTS    			:= $(patsubst $(SRC_DIR)%,$(BUILD_DIR)/%,$(SRCS:.$(SRC_EXT)=.$(OBJ_EXT)))
 
 all: $(BIN)
@@ -63,7 +64,8 @@ $(BIN): $(OBJECTS)
 	$(CC) -o $(BIN) $(OBJECTS) $(LDFLAGS) ${LDLIBS}
 
 clean:
-	rm -rf $(WORKING_DIR)
+	rm -rf $(BUILD_DIR)
+	rm $(BIN)
 
 install: ${BIN}
 	install -d ${DESTDIR}/usr/lib/${PROJECT}/bin

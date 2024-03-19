@@ -4,10 +4,10 @@
 	// https://code.visualstudio.com/docs/editor/variables-reference
 
 	"folders": [
-		{
-			"path": "."
-		},
-	],
+    {
+      "path": "."
+    }
+  ],
 	// extensions.json section
 	"extensions": {
 		"recommendations": [
@@ -62,12 +62,11 @@
 		"configurations": [
 			{
 				"name": "Debug LVGL demo with gdb",
-				"type": "cppdbg",
+				"type": "lldb",
 				"request": "launch",
-			        "program": "${workspaceFolder}/build/bin/demo",
+        "program": "${command:cmake.launchTargetPath}",
 				"args": [],
-				"cwd": "${fileDirname}",
-				"preLaunchTask": "Build",
+        "cwd": "${command:cmake.launchTargetDirectory}",
 				"stopAtEntry": false,
 			},
 		],
