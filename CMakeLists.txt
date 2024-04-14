@@ -71,8 +71,9 @@ add_definitions(-DSIMULATOR=1 -DLV_BUILD_TEST=0 -D${LV_DRIVER_USE})
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/ui/simulator/inc/
     ${CMAKE_CURRENT_SOURCE_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}/main/include
     ${CMAKE_CURRENT_SOURCE_DIR}/lvgl/
-    /usr/include/freetype2
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 
